@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper	namespace="ksmart.mybatis.mapper.GoodsMapper">
+  							
+    	
+  	<select id="getgoodsList" resultType="goods" fetchSize="100">
+  		/*상품조회하는쿼리*/
+  		select 
+			g_code as goodsCode
+			,g_name as goodsName
+			,g_price as goodsPrice
+			,g_seller_id as goodsSellerId
+			,g_reg_date as goodsRegDate
+		from 
+			tb_goods ;
+  	</select>
+  	
+  	<insert id="addGoods" parameterType="goods">
+	
+	 /*상품등록하는 쿼리 */
+	INSERT INTO tb_goods
+	(	g_code
+	   ,g_name
+	   ,g_price
+	   ,g_seller_id
+	   ,g_reg_date
+	)VALUES(
+	   sf_auto_gcode()
+	   ,#{goodsName}
+	   ,#{goodsPrice}
+	   ,#{goodsSellerId}
+	   ,CURDATE()
+	);
+  	</insert>
+  	
+  	
+  	
+  </mapper>
